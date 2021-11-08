@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class = "container">
+<h1>Admin Paneli</h1>
+<div class = "container">
+<small>
+<b>Hoşgeldin, {{request.user.username}}</b><br>
+Senin İçin Bazı İpuçları: <br>
+<b>1-</b>İlgili sayfalarda makalenin bozuk görünmesini engellemek için lütfen ilk 30 karakterden önce editörden fotoğraf eklemeyin.<br>Zaten makale fotoğrafı kısmında seçtiğiniz fotoğraf, makalenin en başında ve ilgili sayfalarda görünecektir. 30 karakterden sonra editör üzerinden<br>dilediğiniz gibi fotoğraf ekleyebilirsiniz.<br>
+<b>2-</b>Editör üzerinden link ile fotoğraf ekleyebilirsiniz. Bunun için Google üzerinden ilgili fotoğrafa sağ tıklayıp "fotoğraf adresini kopyala" seçeneğine<br>tıklamanız yeterlidir. Fakat editör, fotoğrafın boyutunu olduğu gibi sayfaya ekler. Eğer fotoğraf boyutunu değiştirmek isterseniz bunu ilgili pencereden <br> yapabilirsiniz. Ya da  <a href="https://promo.com/tools/image-resizer/">bu site üzerinden</a> daha kolay bir şekilde yapabilirsiniz.<br>
+<b>3-</b>"Haftanın İçeriği" kısmına 2 adet içerik ekleyebilirsiniz. Daha fazla eklemeye çalıştığınızda site sizi uyaracaktır. Eğer ikiden fazla ekleme yaptıysanız<br>lütfen fazladan eklediklerinizi makale düzenleme sayfasından çıkarınız.<br>
+<b>4-</b>"Son Eklenen İçerikler" kısmına otomatik olarak son eklenen 6 makale düşer.<br>
+<b>5-</b>Kontrol Paneli kısmına tıklayarak ayrıntılı site yönetimine ulaşabilirsin. Buradan sitedeki tüm yorumları görebilir, silebilirsin ya da aşağıdaki makale<br>işlemlerini de bu panelden yapabilirsin. Ayrıca istediğin kullanıcıya istediğin yetkiyi bu panelden verebilir, istediğin kullanıcıyı bu panel üzerinden ekleyebilirsin.<br>
+<b>Sorun yaşarsanız bana <a href="mailto:yusufsalih.2363.demir@gmail.com">yusufsalih.2363.demir@gmail.com</a> adresinden ulaşabilirsiniz.</b>
+</small>
+</div>
+
+<hr style = "background-color: white">
+<a href="/admin/" class = "btn btn-dark">Kontrol Paneli</a>
+<a href="/articles/add_article/" class = "btn btn-dark">Makale Ekle</a>
+<a href="/create_about/" class = "btn btn-dark">Hakkımızda Sayfasını Düzenle</a>
+
+
+<br><br>
+{% if articles %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Başlık</th>
+      <th scope="col">Oluşturulma Tarihi</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for article in articles %}
+        <tr>
+            <th scope="row">{{article.id}}</th>
+            <td><a href="{%url 'article:detail' article.id%}">{{article.title}}</a></td>
+            <td>{{article.created_date}}</td>
+            <td>
+                <a href="{%url 'article:update_article' article.id %}" class = "btn btn-dark">Düzenle</a>
+            </td>
+            <td>
+                <a href="{%url 'article:delete_article' article.id %}" class = "btn btn-dark">Sil</a>
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+  There is no article !
+</div>
+{% endif %}
+
+</div>
+
+{% endblock body %}

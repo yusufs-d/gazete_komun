@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{%load static%}
+{% block body %}
+
+<main class="container">
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark" style="background-image: url({%static 'png/bg.png'%});">
+    <div class="col-md-6 px-0" >
+      <h1 class="display-4 fst-italic">Gazete Komün</h1>
+      <p class="lead my-3">Güncel ve sıradışı bilgilerin adresi</p>
+      <p class="lead mb-0"><a href="{%url 'about'%}" class="text-white fw-bold">Hakkımızda</a></p>
+    </div>
+  </div>
+<h3><i class="bi bi-star-fill"></i> Haftanın İçerikleri</h3>
+<hr>
+  <div class="row mb-2">
+  {% for s_article in s_articles %}
+    <div class="col-md-6">
+      <div class="card mb-3" style="max-width: 540px; border:none">
+  <div class="row g-0">
+    <div class="col-md-4">
+      {% if s_article.article_image %}
+      <img src="{{s_article.article_image.url}}" class="img-fluid rounded-start" alt="...">
+      {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{s_article.title}}</h5>
+        <div class = "btn btn-secondary btn-sm">{{s_article.article_category}}</div>
+        <p class="card-text">{{s_article.content|safe|truncatewords:20}}</p>
+        <a href="/articles/detail/{{s_article.id}}/" class = "btn btn-dark">Devamını Oku</a>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  {% endfor %}
+  </div>
+
+  <div class="row g-5">
+    <div class="col-md-8">
+    <h3>Son Eklenen İçerikler</h3><hr><br>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  
+  {% for l_article in last_articles %}
+    <div class="col">
+    <div class="card" style = "">
+       {% if l_article.article_image %}
+      <img src="{{l_article.article_image.url}}" class="card-img-top" alt="...">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{l_article.title}}</h5>
+        <div class = "btn btn-secondary btn-sm">{{l_article.article_category}}</div>
+        <p class="card-text">{{l_article.content|safe|truncatewords:20}}</p>
+        <a href="/articles/detail/{{l_article.id}}/" class = "btn btn-dark">Devamını Oku</a>
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  
+  
+</div>
+
+     
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-dark" href="#">En yukarı git</a>
+      </nav>
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+
+        <div class="p-4">
+          <h4 class="fst-italic">Bizi  Spotify'dan Takip Edin</h4>
+        </div>
+               <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:6sFIWsNpZYqfjUpaCgueju&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+
+
+{% endblock body %}
+

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{%load static%}
+{% block body %}
+<div class="container">
+<h1>Hakkımızda</h1><br>
+<article>
+        
+        <section class="mb-5">
+            {{ abt.content|safe }}
+        </section>
+    </article>
+
+</div>
+
+
+
+{% endblock body %}

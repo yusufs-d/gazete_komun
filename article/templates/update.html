@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class = "container">
+<h1>Makaleyi Güncelle</h1>
+<hr style = "background-color: white">
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{form|crispy}}
+        <br>
+        <button type = "submit" class = "btn btn-dark">Makaleyi Güncelle</button>
+    </form>
+  </div> 
+</div>
+
+</div>
+
+{% endblock body %}
